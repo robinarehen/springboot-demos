@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  micro_product:
+    container_name: product_app
+    image: micro/product:1.0.0
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+networks:
+  backend:
+    name: micro_product_net
