@@ -12,12 +12,12 @@ import com.rah.demo.microproduct.app.model.ProductVo;
 public class ProductControllerImplTest {
 
 	private ProductControllerImpl controller;
-	
+
 	@BeforeEach
 	void init() {
 		this.controller = new ProductControllerImpl();
 	}
-	
+
 	@Test
 	void addProductTest() {
 		ProductVo productVo = new ProductVo();

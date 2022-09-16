@@ -1,3 +1,4 @@
+
 package com.rah.demo.microproduct.app.model;
 
 import lombok.Data;
