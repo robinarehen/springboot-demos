@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/layouts :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<header th:replace="fragments/layouts :: header-users(activeLink='Listar Roles')"></header>
+
+	<main class="container">
+		<div class="row">
+			<div class="col s12 m12 offset-l2">
+				<h4 th:text="${titlePage}"></h4>
+			</div>
+			<div class="col s12 m12 offset-l2">
+				<table>
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Nombre</th>
+							<th>Descripción</th>
+							<th>Modulos</th>
+							<th>Usuarios</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="rol, iterador : ${listaRol}">
+							<td th:text="${iterador.index + 1}"></td>
+							<td th:text="${rol.nombre}"></td>
+							<td th:text="${rol.descripcion}"></td>
+							<td>
+								<a th:href="${'/roles/modulos/' + rol.idRol}">
+									<i class="material-icons">remove_red_eye</i>
+								</a>
+							</td>
+							<td>
+								<a href="#">
+									<i class="material-icons">remove_red_eye</i>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</main>
+
+	<footer th:replace="fragments/layouts :: footer(paramerJs='/js/roles.js')"></footer>
+</body>
+</html>

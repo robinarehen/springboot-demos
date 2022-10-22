@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/layouts :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<header th:replace="fragments/layouts :: header-users(activeLink='Listar Modulos')"></header>
+
+	<main class="container">
+		<div class="row">
+			<div class="col s12 m12 offset-l2">
+				<h4 th:text="${titlePage}"></h4>
+				<a href="/modulos" class="btn-back">
+					<i class="material-icons">close</i>
+				</a>
+			</div>
+			<div class="col s12 m12 offset-l2">
+				<table>
+					<thead>
+						<tr th:if="${listaPaginas != null && listaPaginas.size() > 0}">
+							<th colspan="4">
+								<h5>
+									Modulo: <strong th:text="${listaPaginas.get(0).moduloModel.nombre}"></strong>
+								</h5>
+							</th>
+						</tr>
+						<tr>
+							<th>#</th>
+							<th>Etiqueta</th>
+							<th>Url</th>
+							<th>Icono</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="pagina, iterador : ${listaPaginas}">
+							<td th:text="${iterador.index + 1}"></td>
+							<td th:text="${pagina.label}"></td>
+							<td th:text="${pagina.url}"></td>
+							<td>
+								<i class="material-icons" th:text="${pagina.icono}"></i>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</main>
+
+	<footer th:replace="fragments/layouts :: footer(paramerJs='/js/modulos.js')"></footer>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/layouts :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header th:replace="fragments/layouts :: header-users(activeLink='Crear Roles')"></header>
+
+	<main class="container">
+		<div class="row">
+			<div class="col s12 m12 offset-l2">
+				<h4 th:text="${titlePage}"></h4>
+			</div>
+			<div class="col s12 m12 offset-l2">
+				<div class="row">
+					<form id="crear-rol" class="col s12" th:action="@{/roles/crear}" 
+						method="post" th:object="${crearRol}" onsubmit="return validarForm('crear-rol');">
+						<input type="hidden" id="inputRespuesta" th:value="${respuesta}">
+						<div class="row">
+							<div class="input-field col s12 m6">
+								<input id="nombre" type="text" class="validate" autocomplete="off"
+									th:field="*{nombre}">
+								<label for="nombre">Nombre</label>
+								<span class="helper-text" data-error="Campo Obligatorio">Campo Obligatorio</span>
+							</div>
+							<div class="input-field col s12 m6">
+								<input id="descripcion" type="text" autocomplete="off"
+									th:field="*{descripcion}">
+								<label for="descripcion">Descripción</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12 text-right">
+								<button type="submit" class="waves-effect blue btn">
+									<i class="material-icons left">save</i> Crear
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer th:replace="fragments/layouts :: footer(paramerJs='/js/roles.js')"></footer>
+</body>
+</html>

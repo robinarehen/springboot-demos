@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/layouts :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header th:replace="fragments/layouts :: header-users(activeLink='Crear Usuarios')"></header>
+
+	<main class="container">
+		<div class="row">
+			<div class="col s12 m12 offset-l2">
+				<h4 th:text="${titlePage}"></h4>
+			</div>
+			<div class="col s12 m12 offset-l2">
+				<div class="card">
+					<div class="row card-content">
+						<form id="crear-usuario" class="col s12" th:action="@{/usuarios/crear}" 
+							method="post" th:object="${crearUsuario}" onsubmit="return validarForm('crear-usuario');">
+							<input type="hidden" id="inputRespuesta" th:value="${respuesta}">
+							<div class="row">
+								<div class="input-field col s12 m6">
+									<input id="nombres" type="text" class="validate" autocomplete="off"
+										th:field="*{personaModel.nombres}">
+									<label for="nombres">Nombres</label>
+									<span class="helper-text" data-error="Campo Obligatorio">Campo Obligatorio</span>
+								</div>
+								<div class="input-field col s12 m6">
+									<input id="apellidos" type="text" class="validate" autocomplete="off"
+										th:field="*{personaModel.apellidos}">
+									<label for="apellidos">Apellidos</label>
+									<span class="helper-text" data-error="Campo Obligatorio">Campo Obligatorio</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 m6">
+									<input id="usuario" type="text" autocomplete="off"
+										th:field="*{usuario}">
+									<label for="usuario">Usuario</label>
+								</div>
+								<div class="input-field col s12 m6">
+									<label for="estado">
+										<input id="estado" type="checkbox" class="filled-in" th:checked="${enabled}">									
+										<span>Estado</span>
+									</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 text-right">
+									<button type="submit" class="waves-effect blue btn">
+										<i class="material-icons left">save</i> Crear
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer th:replace="fragments/layouts :: footer"></footer>
+</body>
+</html>

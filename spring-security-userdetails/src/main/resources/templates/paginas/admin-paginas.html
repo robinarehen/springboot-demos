@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/layouts :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<header th:replace="fragments/layouts :: header-users(activeLink='Listar Paginas')"></header>
+
+	<main class="container">
+		<div class="row">
+			<div class="col s12 m12 offset-l2">
+				<h4 th:text="${titlePage}"></h4>
+			</div>
+			<div class="col s12 m12 offset-l2">
+				<table>
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Etiqueta</th>
+							<th>Url</th>
+							<th>Modulo</th>
+							<th>Icono</th>
+							<th>Descripción</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="pagina, iterador : ${listaPaginas}">
+							<td th:text="${iterador.index + 1}"></td>
+							<td th:text="${pagina.label}"></td>
+							<td th:text="${pagina.url}"></td>
+							<td th:text="${pagina.moduloModel.label}"></td>
+							<td>
+								<i class="material-icons" th:text="${pagina.icono}"></i>
+							</td>
+							<td th:text="${pagina.descripcion}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</main>
+
+	<footer th:replace="fragments/layouts :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/layouts :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<header th:replace="fragments/layouts :: header-users(activeLink='Listar Roles')"></header>
+
+	<main class="container">
+		<div class="row">
+			<div class="col s12 m12 offset-l2">
+				<h4 th:text="${titlePage}"></h4>
+				<a href="/roles" class="btn-back">
+					<i class="material-icons">close</i>
+				</a>
+			</div>
+			<div class="col s12 m12 offset-l2">
+				<table>
+					<thead>
+						<tr>
+							<th colspan="5">
+								<h5>
+									Rol: <strong th:text="${dataRol.nombre}"></strong>
+								</h5>
+							</th>
+						</tr>
+						<tr>
+							<th>#</th>
+							<th>Nombre</th>
+							<th>Etiqueta</th>
+							<th>Icono</th>
+							<th>Paginas</th> 
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="modulo, iterador : ${listaModulosRol.entrySet()}">
+							<td th:text="${iterador.index + 1}"></td>
+							<td th:text="${modulo.getValue().nombre}"></td>
+							<td th:text="${modulo.getValue().label}"></td>
+							<td>
+								<i class="material-icons" th:text="${modulo.getValue().icono}"></i>
+							</td>
+							<td>
+								<a th:href="${T(java.lang.String).format('/roles/paginas/%s/%s', dataRol.idRol, modulo.getValue().idModulo)}">
+									<i class="material-icons">remove_red_eye</i>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</main>
+
+	<footer th:replace="fragments/layouts :: footer(paramerJs='/js/roles.js')"></footer>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:fragment="head">
+	<meta charset="ISO-8859-1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title th:text="${titlePage}">Insert title here</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link th:href="@{/css/materialize.min.css}" rel="stylesheet" />
+	<link th:href="@{/css/materialize.init.css}" rel="stylesheet" />
+</head>
+<body>
+
+	<header th:fragment="header-login">
+		<div id="menu-web" class="navbar-fixed">
+			<nav class="blue darken-4">
+				<div class="nav-wrapper container">
+					<a href="/" class="brand-logo center" th:text="${titlePage}"></a>
+				</div>
+			</nav>
+		</div>
+	</header>
+
+	<header th:fragment="header-users">
+		<div id="menu-web" class="navbar-fixed">
+			<nav class="blue darken-4">
+				<div class="nav-wrapper container">
+					<a href="/dashboard" class="brand-logo center">DashBoard</a>
+					<a href="#" data-target="slide-out" class="sidenav-trigger right">
+						<i class="material-icons">menu</i>
+					</a>
+					<ul id="nav-mobile" class="right hide-on-med-and-down">
+						<li><a href="/logout"><i class="material-icons left">lock</i>Logout</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<div id=menu-movil>
+			<ul id="slide-out" class="sidenav sidenav-fixed">
+				<li>
+					<div class="user-view">
+						<div class="background">
+							<img src="https://materializecss.com/images/office.jpg">
+						</div>
+						<a href="#user">
+							<img class="circle" src="https://materializecss.com/images/yuna.jpg">
+						</a>
+						<a href="#name"><span class="white-text name">Name Last Name</span></a>
+						<a href="#email"><span class="white-text email">example@gmail.com</span></a>
+					</div>
+				</li>
+				<li><a href="/dashboard"><i class="material-icons">home</i>home</a></li>
+				<li><div class="divider"></div></li>
+				<li>
+					<ul class="collapsible collapsible-accordion">
+						<li th:each="menu :${session.menuPaginas.entrySet()}"
+							th:class="${#strings.equals(activeModule, menu.getKey())} ? 'active' : ''">
+							<a class="collapsible-header">
+								<i class="material-icons">folder</i>
+								<span th:text="${menu.getKey()}"></span>
+							</a>
+							<div class="collapsible-body">
+								<ul>
+									<li th:each="paginas :${menu.getValue()}"
+										th:class="${#strings.equals(activeLink, paginas.label)} ? 'active' : ''">
+										<a th:href="${paginas.url}">
+											<i class="material-icons" th:text="${paginas.icono}">list</i>
+											<span th:text="${paginas.label}"></span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+					</ul>					
+				</li>
+				<li><div class="divider"></div></li>
+				<li><a href="/logout"><i class="material-icons">lock</i>Logout</a></li>
+			</ul>
+		</div>
+	</header>
+
+	<footer th:fragment="footer">
+		<script type="text/javascript" th:src="@{/js/materialize.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/materialize.init.js}"></script>
+		<!-- <script type="text/javascript" th:src="@{/js/xhttpAjax.js}"></script> -->
+		<script th:if="${paramerJs} != null" type="text/javascript" th:src="${paramerJs}"></script>
+	</footer>
+</body>
+</html>
