@@ -59,3 +59,6 @@ Lo primero que debemos hacer es generar las clases desde el **WSDL** puede ser u
   </configuration>
 </plugin>
 ```
+
+# Crear web service soap
+https://spring.io/guides/gs/producing-web-service/
