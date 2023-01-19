@@ -20,6 +20,7 @@ public class MapperUtil {
 		this.objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 		this.objectMapper.registerModule(new JavaTimeModule()).configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,
 				false);
+		this.objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
 	}
 
 	public <T> T mapperObject(Object imput, Class<T> output) {
