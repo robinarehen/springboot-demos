@@ -44,7 +44,9 @@
 						<a href="#user">
 							<img class="circle" src="https://materializecss.com/images/yuna.jpg">
 						</a>
-						<a href="#name"><span class="white-text name">Name Last Name</span></a>
+						<a href="#name">
+							<span class="white-text name" th:text="${session.userInfo != null ? session.userInfo : 'Name LastName'}"></span>
+						</a>
 						<a href="#email"><span class="white-text email">example@gmail.com</span></a>
 					</div>
 				</li>

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -27,6 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	private final UsuarioRepository usuarioRepository;
 	private final PaginaRolRepository paginaRolRepository;
+	private final HttpServletRequest httpServletRequest;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -38,9 +41,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		List<RolModel> roles = usuarioModel.getRolUsuarioModels().stream().map(RolUsuarioModel::getRolModel)
 				.collect(Collectors.toList());
 
+		String userInfo = String.format("%s %s", usuarioModel.getPersonaModel().getNombres(),
+				usuarioModel.getPersonaModel().getApellidos());
+		
+		this.httpServletRequest.getSession().setAttribute("userInfo", userInfo);
+
 		List<GrantedAuthority> authorities = this.paginaRolRepository.findAllByRolModelIn(roles).stream()
-				.map(PaginaRolModel::getPaginaModuloModel)
-				.map(PaginaModuloModel::getUrl)
+				.map(PaginaRolModel::getPaginaModuloModel).map(PaginaModuloModel::getUrl)
 				.map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 
 		return new User(usuarioModel.getUsuario(), usuarioModel.getContrasenia(), usuarioModel.isEnabled(), true, true,

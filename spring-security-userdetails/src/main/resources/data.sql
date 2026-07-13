@@ -1,14 +1,19 @@
 insert into usuarios (id_usuario, usuario, contrasenia, enabled) values (1, 'rarellano', '$2a$10$iPwRfYkeETRb8vYqtZd/1uxndPdoFlrvVjicZe3sFXlr7e4FBB5vC', true);
 insert into usuarios (id_usuario, usuario, contrasenia, enabled) values (2, 'rhenriquez', '$2a$10$iPwRfYkeETRb8vYqtZd/1uxndPdoFlrvVjicZe3sFXlr7e4FBB5vC', true);
+insert into usuarios (id_usuario, usuario, contrasenia, enabled) values (3, 'robinarehen', '$2a$10$iPwRfYkeETRb8vYqtZd/1uxndPdoFlrvVjicZe3sFXlr7e4FBB5vC', true);
 
 insert into datos_personales (id_usuario, nombres, apellidos) values (1, 'Robin', 'Arellano');
 insert into datos_personales (id_usuario, nombres, apellidos) values (2, 'Robin', 'Henriquez');
+insert into datos_personales (id_usuario, nombres, apellidos) values (3, 'Robin Sneyt', 'Are Hen');
 
 insert into roles (id_rol, nombre, descripcion) values (1, 'Admin', 'Administrador');
 insert into roles (id_rol, nombre, descripcion) values (2, 'Dev', 'Desarrollador');
+insert into roles (id_rol, nombre, descripcion) values (3, 'Rev', 'Revisor');
 
 insert into roles_usuarios (id_rol_usuario, id_usuario, id_rol, descripcion) values (1, 1, 1, 'user: rarellano - rol: Admin');
-insert into roles_usuarios (id_rol_usuario, id_usuario, id_rol, descripcion) values (2, 2, 2, 'user: rhenriquez - rol: dev');
+insert into roles_usuarios (id_rol_usuario, id_usuario, id_rol, descripcion) values (2, 2, 2, 'user: rhenriquez - rol: Dev');
+insert into roles_usuarios (id_rol_usuario, id_usuario, id_rol, descripcion) values (3, 3, 2, 'user: robinarehen - rol: Dev');
+insert into roles_usuarios (id_rol_usuario, id_usuario, id_rol, descripcion) values (4, 3, 3, 'user: robinarehen - rol: Rev');
 
 insert into modulos (id_modulo, nombre, label, icono) values (1, 'Servicio Modulos', 'Modulos', 'folder');
 insert into modulos (id_modulo, nombre, label, icono) values (2, 'Servicio Roles', 'Roles', 'folder');
@@ -24,6 +29,8 @@ insert into paginas_modulo (id_modulo, label, url, icono) values (3, 'Crear Usua
 insert into paginas_modulo (id_modulo, label, url, icono) values (4, 'Listar Paginas', '/paginas', 'list');
 /*insert into paginas_modulo (id_modulo, label, url, icono) values (4, 'Crear Paginas', '/paginas/crear', 'save');*/
 
+insert into paginas_modulo (id_modulo, label, url, icono) values (3, 'User Test', '/user-test', 'verified_user');
+
 /*Rol Admin*/
 insert into paginas_rol (id_pagina_modulo, id_rol) values (1, 1);
 insert into paginas_rol (id_pagina_modulo, id_rol) values (2, 1);
@@ -36,6 +43,9 @@ insert into paginas_rol (id_pagina_modulo, id_rol) values (7, 1);
 /*Rol Dev*/
 insert into paginas_rol (id_pagina_modulo, id_rol) values (1, 2);
 insert into paginas_rol (id_pagina_modulo, id_rol) values (2, 2);
+
+/*Rol Rev*/
+insert into paginas_rol (id_pagina_modulo, id_rol) values (8, 3);
 
 /*
 The passwords is: abc123abc
