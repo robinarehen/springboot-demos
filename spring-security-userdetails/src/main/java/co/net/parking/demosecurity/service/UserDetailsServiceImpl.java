@@ -38,7 +38,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		List<RolModel> roles = usuarioModel.getRolUsuarioModels().stream().map(RolUsuarioModel::getRolModel)
 				.collect(Collectors.toList());
 
-		List<GrantedAuthority> authorities = this.paginaRolRepository.findAllByRolModel(roles).stream()
+		List<GrantedAuthority> authorities = this.paginaRolRepository.findAllByRolModelIn(roles).stream()
 				.map(PaginaRolModel::getPaginaModuloModel)
 				.map(PaginaModuloModel::getUrl)
 				.map(SimpleGrantedAuthority::new).collect(Collectors.toList());

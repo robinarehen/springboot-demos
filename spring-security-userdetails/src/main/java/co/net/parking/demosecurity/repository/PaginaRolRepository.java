@@ -11,6 +11,6 @@ public interface PaginaRolRepository extends JpaRepository<PaginaRolModel, Integ
 
 	List<PaginaRolModel> findByRolModel(RolModel rolModel);
 
-	List<PaginaRolModel> findAllByRolModel(List<RolModel> rolsModel);
+	List<PaginaRolModel> findAllByRolModelIn(List<RolModel> rolsModel);
 
 }
