@@ -1,6 +1,5 @@
 package co.net.parking.demosecurity.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Data;
 
@@ -23,8 +24,9 @@ public class PersonaModel {
 	private String nombres;
 	private String apellidos;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_usuario")
+	@OneToOne(fetch = FetchType.EAGER)
+	@JsonBackReference
 	private UsuarioModel usuarioModel;
 
 }

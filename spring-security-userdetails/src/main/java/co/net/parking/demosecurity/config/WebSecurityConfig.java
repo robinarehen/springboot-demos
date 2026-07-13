@@ -26,10 +26,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		String[] urlsAll = new String[] { "/", "/index", "/login", "/css/**", "/js/**" };
+		String[] urlsAll = new String[] { "/", "/index", "/login", "/logout", "/fragments/**",
+				"/css/**", "/js/**", "/favicon.ico"};
 
-		http.authorizeRequests().antMatchers(urlsAll).permitAll().anyRequest().authenticated().and()
-			.formLogin().loginPage("/login").defaultSuccessUrl("/dashboard", true).permitAll();
+		// @formatter:off
+		http.authorizeRequests().antMatchers(urlsAll).permitAll()
+			.antMatchers("/dashboard").authenticated()
+//			.anyRequest().authenticated()
+			.anyRequest().access("@securityCheckUrlAccess.checkUrlAccess(request, authentication)")
+			.and()
+			.formLogin()
+			.loginPage("/login").defaultSuccessUrl("/dashboard", true).permitAll();
+		// @formatter:on
 	}
 
 }

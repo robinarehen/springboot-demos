@@ -1,6 +1,5 @@
 package co.net.parking.demosecurity.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,9 +9,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
-@Data
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "roles_usuarios")
 public class RolUsuarioModel {
@@ -23,11 +26,13 @@ public class RolUsuarioModel {
 	private String descripcion;
 
 	@JoinColumn(name = "id_usuario")
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonBackReference
 	private UsuarioModel usuarioModel;
 
 	@JoinColumn(name = "id_rol")
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JsonBackReference
 	private RolModel rolModel;
 
 }

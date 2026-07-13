@@ -12,12 +12,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "usuarios")
 public class UsuarioModel {
@@ -25,17 +26,18 @@ public class UsuarioModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idUsuario;
-	@Column(length = 20, nullable = false)
+	@Column(length = 20, nullable = false, unique = true)
 	private String usuario;
 	@Column(nullable = false)
 	private String contrasenia;
 	private boolean enabled;
 
 	@OneToMany(mappedBy = "usuarioModel", fetch = FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)//solution to MultipleBagFetchException in H2
+	@JsonManagedReference
 	private List<RolUsuarioModel> rolUsuarioModels;
 
 	@OneToOne(mappedBy = "usuarioModel")
+	@JsonManagedReference
 	private PersonaModel personaModel;
 
 }

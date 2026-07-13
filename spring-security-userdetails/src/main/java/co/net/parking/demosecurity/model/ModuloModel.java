@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Data;
 
 @Data
@@ -28,6 +30,7 @@ public class ModuloModel {
 	private String descripcion;
 
 	@OneToMany(mappedBy = "moduloModel")
+	@JsonBackReference
 	private List<PaginaModuloModel> paginaModuloModels;
 
 }

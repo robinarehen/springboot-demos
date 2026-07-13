@@ -8,8 +8,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import co.net.parking.demosecurity.service.UsuarioService;
 import co.net.parking.demosecurity.service.UsuarioServiceImpl;
@@ -25,12 +25,12 @@ public class HomeController {
 		this.usuarioService = usuarioService;
 	}
 
-	@RequestMapping({ "/", "/index", "/login" })
+	@GetMapping({ "/", "/index", "/login" })
 	public String login(Model model) {
 		return ConstantsUtil.HOME_LOGIN;
 	}
 
-	@RequestMapping("/logout")
+	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
 
 		SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
@@ -40,9 +40,8 @@ public class HomeController {
 		return ConstantsUtil.HOME_LOGOUT;
 	}
 
-	@RequestMapping("/dashboard")
+	@GetMapping("/dashboard")
 	public String dashboard(Principal principal, Model model, HttpSession session) {
-
 		if (session != null && session.getAttribute(ConstantsUtil.HOME_MENU) != null) {
 			return ConstantsUtil.HOME_PAGE;
 		}

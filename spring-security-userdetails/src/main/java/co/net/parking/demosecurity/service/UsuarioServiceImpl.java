@@ -38,11 +38,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 		Map<String, List<PaginaModuloModel>> menuPaginas = new HashMap<>();
 
 		this.repository.findByUsuario(userName).getRolUsuarioModels().forEach(rol -> {
+
+			rol.getRolModel().getPaginaRolModels().stream()
+					.map(paginas -> paginas.getPaginaModuloModel().getModuloModel().getLabel()).distinct()
+					.forEach(label -> menuPaginas.put(label, null));
+
 			rol.getRolModel().getPaginaRolModels().forEach(paginas -> {
-				String key = paginas.getPaginaModuloModel().getModuloModel().getLabel();
-				if (!menuPaginas.containsKey(key)) {
-					menuPaginas.put(key, null);
-				}
+				paginas.getPaginaModuloModel().setPaginaRolModels(null);
 				paginasModulo.add(paginas.getPaginaModuloModel());
 			});
 		});
@@ -59,7 +61,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public List<UsuarioModel> getAll() {
-		// TODO Auto-generated method stub
 		Pageable pageable = PageRequest.of(0, 10);
 		return this.repository.findAll(pageable).getContent();
 	}

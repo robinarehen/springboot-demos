@@ -4,16 +4,19 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-@Data
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "roles")
 public class RolModel {
@@ -26,9 +29,11 @@ public class RolModel {
 	private String descripcion;
 
 	@OneToMany(mappedBy = "rolModel")
+	@JsonManagedReference
 	private List<RolUsuarioModel> rolUsuarioModels;
 
-	@OneToMany(mappedBy = "rolModel", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "rolModel")
+	@JsonManagedReference
 	private List<PaginaRolModel> paginaRolModels;
 
 }
